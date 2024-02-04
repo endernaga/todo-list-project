@@ -1,0 +1,11 @@
+.top-right-position {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
