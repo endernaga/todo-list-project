@@ -1,6 +1,6 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from todo.models import Task, Tags
@@ -52,8 +52,10 @@ class TagsDeleteView(DeleteView):
     model = Tags
 
 
-def change_finished_status(request, pk):
-    task = Task.objects.get(pk=pk)
-    task.finished = not task.finished
-    task.save()
-    return redirect("todo:index")
+class ChangeFinishedViewStatus(View):
+    def post(self, request, *args, **kwargs):
+        pk = kwargs.get("pk")
+        task = Task.objects.get(pk=pk)
+        task.finished = not task.finished
+        task.save()
+        return redirect("todo:index")
